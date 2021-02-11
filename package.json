@@ -34,7 +34,6 @@
   ],
   "main": "./dist/extension",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "vscode:prepublish": "webpack --mode production",
     "compile": "webpack --mode none",
     "watch": "webpack --mode development --watch --info-verbosity verbose",
@@ -55,10 +54,9 @@
     "Formatters",
     "Snippets"
   ],
-  "resolutions": {
-    "minimist": "^1.2.5",
-    "yargs-parser": "^19.0.4"
-  },
+  "extensionDependencies": [
+    "redhat.vscode-commons"
+  ],
   "devDependencies": {
     "@types/fs-extra": "^8.0.0",
     "@types/node": "^10.14.16",
@@ -67,7 +65,7 @@
     "gulp": "^4.0.2",
     "gulp-rename": "^1.4.0",
     "gulp-tslint": "^8.1.3",
-    "minimist": ">=1.2.5",
+    "minimist": "^1.2.5",
     "serialize-javascript": "^4.0.0",
     "ts-loader": "^6.0.1",
     "tslint": "^5.12.1",
@@ -78,8 +76,9 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@redhat-developer/vscode-redhat-telemetry": "^0.0.13",
     "expand-home-dir": "^0.0.3",
-    "find-java-home": "1.1.0",
+    "find-java-home": "^1.1.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
     "path-exists": "^4.0.0",

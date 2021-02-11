@@ -10,6 +10,7 @@
  *  Microsoft Corporation - Auto Closing Tags
  */
 
+import { Telemetry } from './telemetry';
 import * as os from 'os';
 import * as path from 'path';
 import { Command, commands, ExtensionContext, extensions, IndentAction, LanguageConfiguration, languages, Position, TextDocument, TextEditor, Uri, window, workspace } from "vscode";
@@ -140,7 +141,14 @@ namespace ActionableNotification {
 
 let languageClient: LanguageClient;
 
-export function activate(context: ExtensionContext) {
+export async function activate(context: ExtensionContext) {
+
+  await Telemetry.startTelemetry();
+  await (await Telemetry.getTelemetryManager()).send({
+    name: "testEvent",
+    type: "Test Startup Event"
+  });
+
   // Register commands for XML documentation
   context.subscriptions.push(markdownPreviewProvider);
   context.subscriptions.push(commands.registerCommand(Commands.OPEN_DOCS_HOME, async () => {
