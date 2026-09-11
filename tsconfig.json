@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "nodenext",
+    "module": "commonjs",
+    "moduleResolution": "bundler",
 
     "sourceMap": true,
     "skipLibCheck": true,
@@ -14,8 +15,7 @@
     "outDir": "out",
     "alwaysStrict": true,
     "lib": [
-      "dom",
-      "es2019"
+      "es2020"
     ],
     
     "rootDir": ".",
