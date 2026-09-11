@@ -17,6 +17,7 @@ import { XMLExtensionApi } from './api/xmlExtensionApi';
 import { getXmlExtensionApiImplementation } from './api/xmlExtensionApiImplementation';
 import { cleanUpHeapDumps } from './client/clientErrorHandler';
 import { getIndentationRules } from './client/indentation';
+import { activateXmlEncodingDetection } from './client/xmlEncoding';
 import { XML_SUPPORTED_LANGUAGE_IDS, startLanguageClient } from './client/xmlClient';
 import { registerClientOnlyCommands } from './commands/registerCommands';
 import { collectXmlJavaExtensions } from './plugin';
@@ -41,6 +42,9 @@ export async function activate(context: ExtensionContext): Promise<XMLExtensionA
 
   // Register in the context 'xml.supportedLanguageIds' to use it in command when condition in package.json
   commands.executeCommand('setContext', 'xml.supportedLanguageIds', XML_SUPPORTED_LANGUAGE_IDS);
+
+  // Detect XML encoding from prolog and reopen with correct encoding if needed
+  activateXmlEncodingDetection(context, XML_SUPPORTED_LANGUAGE_IDS);
 
   let requirementsData: requirements.RequirementsData;
   try {
